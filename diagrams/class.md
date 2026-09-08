@@ -23,6 +23,7 @@ classDiagram
         <<Protocol>>
         +update(product_name: str, remaining_stock: int, threshold: int) None
     }
+    
 
     class EmailNotifier {
         +recipient_email: str
