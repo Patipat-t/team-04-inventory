@@ -1,8 +1,1 @@
-Figma / draw.io Mockup Link:
-https://www.figma.com/file/sample-lab04-inventory-mockup
-
-การเลือกใช้ชุดสีตามมาตรฐาน WCAG AA Contrast:
-- Primary (#1E40AF): ใช้กับปุ่มหลัก "บันทึก" และ "เข้าสู่ระบบ"
-- Success (#15803D): ใช้กับสถานะ "สินค้าคงเหลือปกติ" และข้อความบันทึกสำเร็จ
-- Warning (#B45309): ใช้กับข้อความแจ้งเตือน "สินค้าใกล้หมด" และ Error Message
-- Text (#111827): ใช้กับข้อความหลักทั้งหมดบนพื้นหลังสีขาว
+https://www.figma.com/design/pIuLoqe8UQgxpkkQRfrdrc/Lab04-Inventory-Mockup?node-id=0-1&t=DOAXIFJsDb1WDXND-1

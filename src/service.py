@@ -18,14 +18,18 @@ class InventoryService:
     def issue_stock(self, product_id: str, quantity: int) -> None:
         if product_id not in self.products:
             raise KeyError("ไม่พบสินค้า")
-        
+
+        if quantity <= 0:
+            raise ValueError("จำนวนสินค้าที่เบิกต้องมากกว่า 0")
+
         product = self.products[product_id]
         if product.stock < quantity:
             raise ValueError("สินค้าไม่เพียงพอ")
 
         product.stock -= quantity
 
-        if product.stock < product.threshold:
+        # แก้ไขเงื่อนไขจาก < เป็น <= เพื่อแจ้งเตือนทันทีที่สต็อกลดลงมาถึงเกณฑ์
+        if product.stock <= product.threshold:
             msg = f"สินค้า {product.name} สต็อกต่ำกว่าเกณฑ์ เหลือ {product.stock} ชิ้น"
             for notifier in self.notifiers:
                 notifier.send(msg)
@@ -36,4 +40,3 @@ class InventoryService:
             val = product.stock * product.price
             report[product.category] = report.get(product.category, 0.0) + val
         return report
-        

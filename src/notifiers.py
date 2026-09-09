@@ -19,8 +19,9 @@ class NotifierFactory:
     """Factory Pattern สำหรับสร้าง Notifier"""
     @staticmethod
     def create(channel: str) -> Notifier:
-        if channel.lower() == "email":
+        cleaned_channel = channel.strip().lower()
+        if cleaned_channel == "email":
             return EmailNotifier()
-        elif channel.lower() == "sms":
+        elif cleaned_channel == "sms":
             return SMSNotifier()
         raise ValueError(f"ไม่รองรับช่องทาง: {channel}")
