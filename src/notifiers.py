@@ -1,5 +1,6 @@
 from typing import Protocol
 
+
 class Notifier(Protocol):
     """Interface สำหรับการส่งแจ้งเตือน"""
     def send(self, message: str) -> None:
