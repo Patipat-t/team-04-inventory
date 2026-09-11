@@ -17,6 +17,6 @@ class InventoryManager:
     def report(self):
         # คำนวณมูลค่ารวม
         total = 0
-        for name, data in self.products.items():
+        for data in self.products.values():
             total += data['stock'] * data['price']
         return total

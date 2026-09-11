@@ -1,5 +1,7 @@
 import pytest
+
 from src.inventory import get_low_stock_items
+
 
 def test_get_low_stock_items_returns_correct_items():
     items = [

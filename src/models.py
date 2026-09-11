@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+
 @dataclass
 class Product:
     """ข้อมูลสินค้าในคลัง"""

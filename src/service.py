@@ -1,12 +1,13 @@
-from typing import Dict, List
+
 from src.models import Product
 from src.notifiers import Notifier
+
 
 class InventoryService:
     """ระบบจัดการคลังสินค้าและแจ้งเตือน"""
     def __init__(self) -> None:
-        self.products: Dict[str, Product] = {}
-        self.notifiers: List[Notifier] = []
+        self.products: dict[str, Product] = {}
+        self.notifiers: list[Notifier] = []
 
     def register_notifier(self, notifier: Notifier) -> None:
         """ลงทะเบียนผู้รับแจ้งเตือน (Observer Pattern)"""
@@ -34,8 +35,8 @@ class InventoryService:
             for notifier in self.notifiers:
                 notifier.send(msg)
 
-    def calculate_category_value(self) -> Dict[str, float]:
-        report: Dict[str, float] = {}
+    def calculate_category_value(self) -> dict[str, float]:
+        report: dict[str, float] = {}
         for product in self.products.values():
             val = product.stock * product.price
             report[product.category] = report.get(product.category, 0.0) + val

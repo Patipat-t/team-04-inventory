@@ -1,5 +1,7 @@
 import pytest
+
 from src.ebook_service import DigitalEBook, OrderService
+
 
 # 1. ทดสอบกฎสินค้าดิจิทัล: สต็อกต้องไม่ลดลงเมื่อมีการซื้อ
 def test_digital_ebook_stock_does_not_decrease():

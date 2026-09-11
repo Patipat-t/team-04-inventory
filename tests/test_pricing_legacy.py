@@ -1,5 +1,6 @@
 from src.pricing_refactored import calculate_discount
 
+
 def test_vip_member_discount():
     assert calculate_discount(100, "VIP", True) == 80.0
 
