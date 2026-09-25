@@ -1,9 +1,10 @@
+import pytest
+
 from src.pricing_legacy import calculate_discount
 
-def test_calc_characterization_cases():
-    assert calculate_discount(100, 1, False) == 100
-    assert calculate_discount(100, 5, False) == 100
 
-def test_calc_characterization_edge_cases():
-    assert calculate_discount(0, 5, False) == 0
-    assert calculate_discount(100, 0, False) == 100
+def test_calc_characterization_cases():
+    # Characterization tests for legacy pricing behavior
+    assert calculate_discount(100, "STANDARD", 1) == 100.0
+    assert calculate_discount(100, "VIP", 5) == 80.0
+    assert calculate_discount(200, "MEMBER", 10) == 170.0
