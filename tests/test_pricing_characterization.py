@@ -1,5 +1,3 @@
-import pytest
-
 from src.pricing_legacy import calculate_discount
 
 
