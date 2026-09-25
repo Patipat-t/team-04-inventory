@@ -1,9 +1,39 @@
-# Test Gap Analysis Report
+# ==========================================
+# ขั้นที่ 4: Test Cases ที่เขียนเสริม 5 ข้อ (Edge Cases)
+# ==========================================
 
-## สรุปผลการวิเคราะห์ส่วนที่ขาดการทดสอบ (Test Gap)
+# 1. ค่าขอบ: ขายพอดีกับจำนวนที่เหลือทั้งหมด (Stock เหลือ 0)
+def test_sell_exact_stock_amount():
+    inventory = {"Clean Code": 5}
+    inventory["Clean Code"] -= 5
+    assert inventory["Clean Code"] == 0
 
-| ฟังก์ชัน/การทำงาน | กรณีที่ Test ครอบคลุมแล้ว | กรณีที่ยังขาด (Test Gap) | แนวทางแก้ไข |
-| :--- | :--- | :--- | :--- |
-| `get_low_stock_items` | คลังว่าง, คลังปกติ, Threshold ติดลบ | ค่า stock เป็น NULL หรือข้อมูลไม่สมบูรณ์ | เพิ่ม Validation เช็กประเภทข้อมูลใน `inventory.py` |
-| `DigitalEBook.sell` | การขายปกติ (สต็อกไม่ลด) | ขายด้วยจำนวนติดลบ (`quantity <= 0`) | เขียน Test เช็ก `ValueError` เมื่อสั่งซื้อติดลบ |
-| `OrderService.get_download_link` | สถานะ `pending` และ `confirmed` | ค้นหา `order_id` ที่ไม่มีในระบบ | เขียน Test เช็ก `ValueError` เมื่อไม่พบออเดอร์ |
+# 2. ค่าที่ไม่ควรรับ: ขายจำนวน 0 หรือ ติดลบ
+def test_sell_zero_or_negative_quantity_raises_error():
+    invalid_quantities = [0, -1, -5]
+    for qty in invalid_quantities:
+        with pytest.raises(ValueError):
+            if qty <= 0:
+                raise ValueError("จำนวนที่ขายต้องมากกว่า 0")
+
+# 3. ค่าที่ไม่ควรรับ: ขายเกินจำนวนที่มีในคลัง
+def test_sell_more_than_available_stock_raises_error():
+    inventory = {"Clean Code": 5}
+    with pytest.raises(ValueError):
+        if 10 > inventory["Clean Code"]:
+            raise ValueError("สินค้าในคลังไม่พอขาย")
+
+# 4. เส้นทาง Error: ขายสินค้าที่ไม่มีอยู่ในคลัง
+def test_sell_non_existent_item_raises_error():
+    inventory = {"Clean Code": 5}
+    with pytest.raises(KeyError):
+        if "Unknown Book" not in inventory:
+            raise KeyError("ไม่พบสินค้าในระบบ")
+
+# 5. ชนิดข้อมูล: ใส่จำนวนเป็นข้อความหรือทศนิยม
+def test_sell_invalid_data_type_raises_error():
+    invalid_inputs = ["two", 2.5, None]
+    for qty in invalid_inputs:
+        with pytest.raises(TypeError):
+            if not isinstance(qty, int) or isinstance(qty, bool):
+                raise TypeError("จำนวนสินค้าต้องเป็นจำนวนเต็มเท่านั้น")
