@@ -2,9 +2,9 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ main, "feature/**" ]
+    branches: [ main, "feature/**", "sorawitmm-sudo-patch-1" ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, "sorawitmm-sudo-patch-1" ]
 
 jobs:
   test-and-lint:
