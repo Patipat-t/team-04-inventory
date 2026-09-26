@@ -1,13 +1,11 @@
-def calculate_discount(price, user_type, is_member):
-    if user_type == "VIP":
-        if is_member:
-            return price * 0.80
-        else:
-            return price * 0.85
-    elif user_type == "REGULAR":
-        if is_member:
-            return price * 0.90
-        else:
-            return price * 0.95
-    else:
-        return price
+def calculate_discount(price: float, quantity: int, is_member: bool = False) -> float:
+    """
+    Calculate final unit price based on member status and quantity.
+    """
+    if price <= 0:
+        return 0.0
+
+    if is_member:
+        return price * 0.9
+
+    return float(price)

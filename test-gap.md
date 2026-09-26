@@ -1,9 +1,9 @@
-# Test Gap Analysis Report
+# รายงานการวิเคราะห์จุดขาดของ Unit Test (Test Gap Analysis)
 
-## สรุปผลการวิเคราะห์ส่วนที่ขาดการทดสอบ (Test Gap)
-
-| ฟังก์ชัน/การทำงาน | กรณีที่ Test ครอบคลุมแล้ว | กรณีที่ยังขาด (Test Gap) | แนวทางแก้ไข |
-| :--- | :--- | :--- | :--- |
-| `get_low_stock_items` | คลังว่าง, คลังปกติ, Threshold ติดลบ | ค่า stock เป็น NULL หรือข้อมูลไม่สมบูรณ์ | เพิ่ม Validation เช็กประเภทข้อมูลใน `inventory.py` |
-| `DigitalEBook.sell` | การขายปกติ (สต็อกไม่ลด) | ขายด้วยจำนวนติดลบ (`quantity <= 0`) | เขียน Test เช็ก `ValueError` เมื่อสั่งซื้อติดลบ |
-| `OrderService.get_download_link` | สถานะ `pending` และ `confirmed` | ค้นหา `order_id` ที่ไม่มีในระบบ | เขียน Test เช็ก `ValueError` เมื่อไม่พบออเดอร์ |
+| กรณีที่ AI ให้มา | กรณีที่ขาด | Test ที่เราเขียนเสริม |
+| :--- | :--- | :--- |
+| **1. Normal Sell:** ขายสินค้าที่มีอยู่ในคลังตามจำนวนปกติ | **ค่าขอบ (Boundary):** ขายพอดีกับจำนวนที่เหลือทั้งหมด (Stock กลายเป็น 0) | `test_sell_exact_stock_amount()` |
+| **2. Normal Sell:** ขายสินค้าแล้วยอดคงเหลือลดลง | **ค่าที่ไม่ควรรับ (Invalid Input):** ขายจำนวน 0 หรือติดลบ | `test_sell_zero_or_negative_quantity_raises_error()` |
+| **3. Normal Sell:** ขายสินค้าชิ้นเดียวสำเร็จ | **ค่าที่ไม่ควรรับ (Over Sell):** ขายจำนวนมากกว่าที่มีในคลัง | `test_sell_more_than_available_stock_raises_error()` |
+| **4. Normal Sell:** ตรวจสอบเฉพาะกรณีขายสำเร็จ | **เส้นทาง Error (Error Path):** ขายสินค้าที่ไม่เคยมีอยู่ในระบบคลัง | `test_sell_non_existent_item_raises_error()` |
+| **5. Normal Sell:** รับพารามิเตอร์จำนวนเป็นจำนวนเต็มปกติ | **ชนิดข้อมูล (Data Type):** ใส่จำนวนเป็นข้อความ (String) หรือทศนิยม | `test_sell_invalid_data_type_raises_error()` |

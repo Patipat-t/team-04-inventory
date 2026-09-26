@@ -7,4 +7,4 @@ def get_low_stock_items(items: list, threshold: int = 5) -> list:
         if item.get("stock", 0) <= threshold:
             low_stock.append(item)
 
-    return low_stock
+    return sorted(low_stock, key=lambda x: x.get("name", ""))
